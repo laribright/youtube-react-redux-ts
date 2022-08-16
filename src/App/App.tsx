@@ -1,19 +1,18 @@
 import { FC, useEffect } from "react";
-import { useDispatch } from "react-redux";
 
-import { postActions } from "../store";
-import { useSelector } from "../hooks/useTypedSelector";
+import { useAppDispatch, useAppSelector } from "../hooks/useTypedSelector";
 import Loader from "../components/Ui/Loader";
 import PostCard from "../components/PostCard/PostCard";
+import { getPosts } from "../features/posts/postSlice";
 
 const App: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(postActions.getPosts());
+    dispatch(getPosts());
   }, [dispatch]);
 
-  const { loading, data } = useSelector((state) => state.posts);
+  const { loading, data } = useAppSelector((state) => state);
 
   return (
     <div className="container py-5">
